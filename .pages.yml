@@ -1,24 +1,33 @@
+# .pages.yml
+# Fichier de configuration pour Pages CMS
+
+# Informations générales sur le dépôt (optionnel)
+repository:
+  name: "Mon Super Site"
+  description: "Mon site web géré avec Pages CMS et Cloudflare"
+
+# Définition des collections de contenu
 collections:
   - name: "blog-posts"
     label: "Articles de Blog"
-    folder: "content/blog"
-    format: "markdown"
-    create: true
-    slug: "{{slug}}"
+    folder: "content/blog" # Chemin où les fichiers Markdown seront stockés
+    format: "markdown"     # Format de fichier (Markdown)
+    create: true           # Permettre la création de nouveaux articles
+    slug: "{{slug}}"       # Génération du nom de fichier basée sur le titre (slugifié)
     fields:
-      - { label: "Titre", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Résumé", name: "summary", widget: "string" }
-      - { label: "Corps du texte", name: "body", widget: "markdown" }
+      - { label: "Titre", name: "title", widget: "string", required: true }
+      - { label: "Date", name: "date", widget: "datetime", default: "now", required: true }
+      - { label: "Résumé", name: "summary", widget: "string", required: false, hint: "Une courte description pour les listes ou meta-descriptions." }
+      - { label: "Corps de l'article", name: "body", widget: "markdown", required: true } # Éditeur Markdown
+
   - name: "static-pages"
-    label: "Pages Statiques"
-    folder: "content/pages"
-    format: "json" # Stocke les métadonnées au format JSON
-    create: false # Ne crée pas de nouvelles pages statiques via le CMS, gère juste les métadonnées existantes
-    files:
-      - file: "content/pages/contact.json"
-        label: "Détails de la Page Contact"
+    label: "Pages Statiques (Contenu Modifiable)"
+    folder: "content/pages" # Chemin où les fichiers JSON seront stockés
+    format: "json"          # Format de fichier (JSON pour les métadonnées)
+    create: false           # Ne pas permettre la création de nouvelles pages via le CMS (elles sont déjà dans public/)
+    files: # Lister les fichiers existants que le CMS peut éditer
+      - file: "content/pages/contact.json" # Chemin vers le fichier JSON spécifique
+        label: "Détails de la Page Contact" # Libellé affiché dans le CMS
         fields:
-          - { label: "Titre de la Page", name: "pageTitle", widget: "string" }
-          - { label: "Texte d'introduction", name: "introText", widget: "markdown" }
-          # Vous pourriez ajouter d'autres champs pour les infos de contact, horaires, etc.
+          - { label: "Titre de la Page", name: "pageTitle", widget: "string", required: true }
+          - { label: "Texte d'introduction", name: "introText", widget: "markdown", required: true, hint: "Le texte d'intro sous le titre de la page de contact." }
