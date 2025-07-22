@@ -1,53 +1,24 @@
-media:
-  input: public/assets
-  output: /assets
-  categories: [ "image" ]
-content:
-  - name: posts
-    label: Posts
-    type: collection
-    path: _posts
-    view:
-      fields: [ coverImage, title, date ]
+collections:
+  - name: "blog-posts"
+    label: "Articles de Blog"
+    folder: "content/blog"
+    format: "markdown"
+    create: true
+    slug: "{{slug}}"
     fields:
-      - { name: title, label: Title, type: string, required: true }
-      - { name: excerpt, label: Excerpt, type: string }
-      - { name: coverImage, label: Cover image, type: image }
-      - { name: date, label: Date, type: date, options: { time: true, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" } }
-      - name: author
-        label: Author
-        type: object
+      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Résumé", name: "summary", widget: "string" }
+      - { label: "Corps du texte", name: "body", widget: "markdown" }
+  - name: "static-pages"
+    label: "Pages Statiques"
+    folder: "content/pages"
+    format: "json" # Stocke les métadonnées au format JSON
+    create: false # Ne crée pas de nouvelles pages statiques via le CMS, gère juste les métadonnées existantes
+    files:
+      - file: "content/pages/contact.json"
+        label: "Détails de la Page Contact"
         fields:
-          - { name: name, label: Name, type: string }
-          - { name: picture, label: Picture, type: image }
-      - name: ogImage
-        label: Image (social sharing)
-        type: object
-        fields:
-          - { name: url, label: URL, type: image }
-      - { name: body, label: Body, type: rich-text }
-
-content:
-  - name: pages
-    label: pages
-    type: collection
-    path: _pages
-    view:
-      fields: [ coverImage, title, date ]
-    fields:
-      - { name: title, label: Title, type: string, required: true }
-      - { name: excerpt, label: Excerpt, type: string }
-      - { name: coverImage, label: Cover image, type: image }
-      - { name: date, label: Date, type: date, options: { time: true, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" } }
-      - name: author
-        label: Author
-        type: object
-        fields:
-          - { name: name, label: Name, type: string }
-          - { name: picture, label: Picture, type: image }
-      - name: ogImage
-        label: Image (social sharing)
-        type: object
-        fields:
-          - { name: url, label: URL, type: image }
-      - { name: body, label: Body, type: rich-text }
+          - { label: "Titre de la Page", name: "pageTitle", widget: "string" }
+          - { label: "Texte d'introduction", name: "introText", widget: "markdown" }
+          # Vous pourriez ajouter d'autres champs pour les infos de contact, horaires, etc.
