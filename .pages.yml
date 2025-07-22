@@ -31,7 +31,7 @@ content:
   - name: pages
     label: pages
     type: collection
-    path: _posts
+    path: _pages
     view:
       fields: [ coverImage, title, date ]
     fields:
