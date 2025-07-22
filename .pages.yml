@@ -26,7 +26,9 @@ content:
         fields:
           - { name: url, label: URL, type: image }
       - { name: body, label: Body, type: rich-text }
-- name: pages
+
+content:
+  - name: pages
     label: pages
     type: collection
     path: _posts
